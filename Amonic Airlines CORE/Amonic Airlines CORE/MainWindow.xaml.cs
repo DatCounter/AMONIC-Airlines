@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Amonic_Airlines_CORE.Models;
 
 namespace Amonic_Airlines_CORE
 {
@@ -23,6 +24,16 @@ namespace Amonic_Airlines_CORE
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
