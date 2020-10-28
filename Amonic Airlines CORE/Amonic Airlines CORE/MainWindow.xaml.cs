@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Amonic_Airlines_CORE.Models;
+using Amonic_Airlines.Models;
 
-namespace Amonic_Airlines_CORE
+namespace Amonic_Airlines
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

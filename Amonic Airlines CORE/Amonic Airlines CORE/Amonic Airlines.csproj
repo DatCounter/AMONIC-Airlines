@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Amonic_Airlines_CORE</RootNamespace>
+    <RootNamespace>Amonic_Airlines</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

@@ -1,7 +1,7 @@
-﻿<Application x:Class="Amonic_Airlines_CORE.App"
+﻿<Application x:Class="Amonic_Airlines.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Amonic_Airlines_CORE"
+             xmlns:local="clr-namespace:Amonic_Airlines"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

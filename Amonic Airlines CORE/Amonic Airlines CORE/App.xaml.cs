@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Amonic_Airlines_CORE
+namespace Amonic_Airlines
 {
     /// <summary>
     /// Interaction logic for App.xaml

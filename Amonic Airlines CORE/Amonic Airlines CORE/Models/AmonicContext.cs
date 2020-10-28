@@ -3,7 +3,7 @@ using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Amonic_Airlines_CORE.Models
+namespace Amonic_Airlines.Models
 {
     public partial class AmonicContext : DbContext
     {
