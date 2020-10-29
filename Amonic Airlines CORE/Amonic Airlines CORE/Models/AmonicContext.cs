@@ -7,8 +7,11 @@ namespace Amonic_Airlines.Models
 {
     public partial class AmonicContext : DbContext
     {
+        private static AmonicContext _context;
+
         public AmonicContext()
         {
+
         }
 
         public AmonicContext(DbContextOptions<AmonicContext> options)
@@ -17,8 +20,8 @@ namespace Amonic_Airlines.Models
         }
 
         public virtual DbSet<ActivityUser> ActivityUser { get; set; }
-        public virtual DbSet<Offices> Offices { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Office> Offices { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,7 +62,7 @@ namespace Amonic_Airlines.Models
                     .HasConstraintName("FK__ActivityU__Email__3F466844");
             });
 
-            modelBuilder.Entity<Offices>(entity =>
+            modelBuilder.Entity<Office>(entity =>
             {
                 entity.HasKey(e => e.OfficeCode)
                     .HasName("PK__Offices__2CAD32AF1CA9E539");
@@ -74,7 +77,7 @@ namespace Amonic_Airlines.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Email)
                     .HasName("PK__Users__A9D105353CDF422A");
@@ -118,5 +121,12 @@ namespace Amonic_Airlines.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public static AmonicContext GetContext()
+        {
+            if (_context is null)
+                _context = new AmonicContext();
+            return _context;
+        }
     }
 }

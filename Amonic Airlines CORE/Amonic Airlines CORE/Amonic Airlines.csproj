@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ActivityUser.cs" />
+    <Compile Remove="Models\Office.cs" />
+    <Compile Remove="Models\User.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Logo.png" />
   </ItemGroup>
 
@@ -21,6 +27,29 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Amonic Airlines DLL\Amonic Airlines CORE.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Properties.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

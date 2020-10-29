@@ -1,0 +1,109 @@
+﻿<Window x:Class="Amonic_Airlines.Windows.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Amonic_Airlines.Windows"
+        mc:Ignorable="d"
+        Title="AMONIC Airlines Automation System"
+        FontSize="18"
+        FontFamily="PTSans"
+        Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="287*"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Menu IsMainMenu="True" Grid.ColumnSpan="3">
+            <MenuItem Header="Add User" Click="AddUser_Click"/>
+            <MenuItem Header="Exit" Click="Exit_Click"/>
+        </Menu>
+
+        <StackPanel Margin="5" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="Office:" VerticalAlignment="Center"/>
+            <ComboBox Width="300" Height="30" x:Name="OfficeCombobox" Padding="5"
+                      SelectedItem="{Binding SelectedComboItem}" DisplayMemberPath="Name">
+            </ComboBox>
+        </StackPanel>
+
+        <DataGrid Style="{DynamicResource DataGrid}" ItemsSource="{Binding UsersList}"
+                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2"
+                  Margin="5 10" FontSize="16" 
+                  HorizontalContentAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Name" Width="0.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Last Name" Width="0.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding LastName}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Age" Width="0.1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding Age}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="User Role" Width="0.25*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding UserRole}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Email Address" Width="0.35*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding EmailAddress}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Office" Width="0.2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding OfficeName}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Button Content="Change Role" Margin="0 0 60 0" Width="150" Height="30" Click="ChangeRole_Click"/>
+            <Button Content="Enable/Disable Login" Width="200" Height="30" Click="CanLogin_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

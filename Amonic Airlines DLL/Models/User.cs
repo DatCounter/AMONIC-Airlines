@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Amonic_Airlines.Models
 {
-    public partial class Users
+    public partial class User
     {
-        public Users()
+        public User()
         {
             ActivityUser = new HashSet<ActivityUser>();
         }
@@ -20,7 +20,7 @@ namespace Amonic_Airlines.Models
         public bool IsActive { get; set; }
         public int CountInvalidAuthAttempts { get; set; }
 
-        public virtual Offices OfficeNavigation { get; set; }
+        public virtual Office OfficeNavigation { get; set; }
         public virtual ICollection<ActivityUser> ActivityUser { get; set; }
     }
 }

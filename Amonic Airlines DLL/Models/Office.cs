@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Amonic_Airlines.Models
 {
-    public partial class Offices
+    public partial class Office
     {
-        public Offices()
+        public Office()
         {
-            Users = new HashSet<Users>();
+            Users = new HashSet<User>();
         }
 
         public int OfficeCode { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

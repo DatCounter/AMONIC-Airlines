@@ -11,6 +11,6 @@ namespace Amonic_Airlines.Models
         public string UnsuccessfulLogoutReason { get; set; }
         public TimeSpan? TimeSpent { get; set; }
 
-        public virtual Users EmailNavigation { get; set; }
+        public virtual User EmailNavigation { get; set; }
     }
 }
