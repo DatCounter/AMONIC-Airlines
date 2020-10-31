@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AMONIC Airlines Automation System"
         FontSize="18"
-        FontFamily="PTSans"
+        FontFamily="PTSans" Closing="Window_Closing"
         Height="450" Width="800" WindowStartupLocation="CenterScreen">
         
     <Grid>
@@ -30,13 +30,15 @@
         <StackPanel Margin="5" Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <TextBlock Text="Office:" VerticalAlignment="Center"/>
             <ComboBox Width="300" Height="30" x:Name="OfficeCombobox" Padding="5"
-                      SelectedItem="{Binding SelectedComboItem}" DisplayMemberPath="Name">
+                      SelectedItem="SelectedComboItem" DisplayMemberPath="Name"
+                      SelectionChanged="OfficeCombobox_SelectionChanged">
+
             </ComboBox>
         </StackPanel>
 
         <DataGrid Style="{DynamicResource DataGrid}" ItemsSource="{Binding UsersList}"
                   AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2"
-                  Margin="5 10" FontSize="16" 
+                  Margin="5 10" FontSize="16" SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
                   HorizontalContentAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name" Width="0.2*">

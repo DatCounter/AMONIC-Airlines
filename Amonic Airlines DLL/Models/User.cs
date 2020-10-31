@@ -15,10 +15,10 @@ namespace Amonic_Airlines.Models
         public bool IsAdmin { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public int? Office { get; set; }
+        public int Office { get; set; }
         public DateTime Birthdate { get; set; }
         public bool IsActive { get; set; }
-        public int CountInvalidAuthAttempts { get; set; }
+        private int CountInvalidAuthAttempts { get; set; }
 
         public virtual Office OfficeNavigation { get; set; }
         public virtual ICollection<ActivityUser> ActivityUser { get; set; }
