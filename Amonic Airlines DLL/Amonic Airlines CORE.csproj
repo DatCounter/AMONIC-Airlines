@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Amonic_Airlines_Models</RootNamespace>
+    <RootNamespace>Amonic_Airlines_CORE</RootNamespace>
   </PropertyGroup>
 
 </Project>

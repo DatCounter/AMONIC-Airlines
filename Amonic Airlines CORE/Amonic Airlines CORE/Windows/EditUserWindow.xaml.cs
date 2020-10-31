@@ -10,10 +10,10 @@ namespace Amonic_Airlines.Windows
     /// </summary>
     public partial class EditUserWindow : Window, INotifyPropertyChanged
     {
-        private UserModelView selectedUser;
-        public UserModelView SelectedUser { get => selectedUser; private set { selectedUser = value; RaisePropertyChanged(); } }
+        private AdminModelView selectedUser;
+        public AdminModelView SelectedUser { get => selectedUser; private set { selectedUser = value; RaisePropertyChanged(); } }
 
-        public EditUserWindow(UserModelView SelectedUser)
+        public EditUserWindow(AdminModelView SelectedUser)
         {
             InitializeComponent();
             this.SelectedUser = SelectedUser;

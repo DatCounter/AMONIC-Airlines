@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Amonic_Airlines.Models
 {
-    public class UserModelView : INotifyPropertyChanged
+    public class AdminModelView : INotifyPropertyChanged
     {
         private User currentUser;
 
@@ -32,7 +32,7 @@ namespace Amonic_Airlines.Models
         public User CurrentUser { get => currentUser; set { currentUser = value; OnPropertyChanged(); UpdateModel(); } }
 
         //Конструктор, который преобразует сущность User в UserModelView для представления
-        public UserModelView(User user)
+        public AdminModelView(User user)
         {
             this.CurrentUser = user;
         }

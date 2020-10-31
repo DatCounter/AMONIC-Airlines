@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amonic_Airlines.Windows"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800">
+        Title="UserWindow" Height="380" Width="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Exit"/>
+        </Menu>
+        <TextBlock Text="{Binding WelcomeName}" 
+                   Grid.Row="1" 
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Margin="10 15 0 0"/>
+        <TextBlock Text="{Binding TimeSpent}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Row="1"/>
+        <TextBlock Text="{Binding NumberOfCrashes}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Grid.Row="1"
+                   Margin="0 0 25 0"/>
+
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="10 10 10 60" ItemsSource="{Binding ActivitiesUser}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Date" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding LoginDate, StringFormat=d}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Login time" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding LoginDate, StringFormat=hh:mm:ss}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Logout time" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding LogoutDate, StringFormat=hh:mm:ss}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Time spent on system" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding TimeSpent}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Unsuccessful logout reason" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding UnsuccessfulLogoutReason}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

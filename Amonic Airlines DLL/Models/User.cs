@@ -18,6 +18,7 @@ namespace Amonic_Airlines.Models
         public int Office { get; set; }
         public DateTime Birthdate { get; set; }
         public bool IsActive { get; set; }
+        //is invalid action
         private int CountInvalidAuthAttempts { get; set; }
 
         public virtual Office OfficeNavigation { get; set; }

@@ -25,15 +25,15 @@ namespace Amonic_Airlines
         private int countAttempts = Properties.Default.CountAttempts;
         private int countTicks = 10;
         private Visibility visibleTicks = Visibility.Collapsed;
+        private UserWindow userWindow;
 
         private readonly AdminWindow adminWindow = new AdminWindow();
-
         #endregion
 
         #region Public members
         public int CountTicks { get => countTicks; set { countTicks = value; RaisePropertyChanged(); } }
         public Visibility VisibleTicks { get => visibleTicks; set { visibleTicks = value; RaisePropertyChanged(); } }
-        public UserModelView CurrentUser { get; set; }
+        public AdminModelView CurrentUser { get; set; }
         readonly DispatcherTimer Timer = new DispatcherTimer()
         {
             Interval = TimeSpan.FromSeconds(1),
@@ -68,22 +68,6 @@ namespace Amonic_Airlines
             try
             {
                 TryAuthorize = new Authorize(AmonicContext.GetContext().Users.ToList(), Username.Text, Password.Password, ref countAttempts);
-
-
-                Properties.Default["Username"] = Username.Text;
-                Properties.Default.Save();
-
-                var UserSession = AmonicContext.GetContext().ActivityUser.FirstOrDefault(US => US.Email == TryAuthorize.User.Email);
-
-                if (TryAuthorize.User.IsAdmin)
-                {
-                    this.Hide();
-                    adminWindow.Show();
-                }
-
-                //UserSession.LoginDate = DateTime.Now;
-
-                //TODO: Хранение сессий пользователей
 
             }
             catch (AuthenticationException AuthEx)
@@ -128,11 +112,17 @@ namespace Amonic_Airlines
 
                 //TODO: NEED TO CREATE SESSION
 
+                this.Hide();
                 if (TryAuthorize.User.IsAdmin)
                 {
-                    this.Hide();
                     adminWindow.Show();
                     adminWindow.Closed += NotOwnerWindow_Closed;
+                }
+                else
+                {
+                    userWindow = new UserWindow(TryAuthorize.User);
+                    userWindow.Show();
+                    userWindow.Closed += NotOwnerWindow_Closed;
                 }
             }
             //UserSession.LoginDate = DateTime.Now;
@@ -146,11 +136,15 @@ namespace Amonic_Airlines
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Password.Password = null;
-                adminWindow.Hide();
                 this.Show();
             }
             else
+            {
                 this.Close();
+                userWindow.Closed -= NotOwnerWindow_Closed;
+                adminWindow.Closed -= NotOwnerWindow_Closed;
+            }
+
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -188,3 +182,7 @@ namespace Amonic_Airlines
         }
     }
 }
+
+/*TODO: Доделать работу с таймером в юзер-окне
+Проверить код/добавить чистоты и ясности для пользователя
+*/

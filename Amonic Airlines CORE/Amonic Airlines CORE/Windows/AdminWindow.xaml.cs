@@ -19,14 +19,14 @@ namespace Amonic_Airlines.Windows
     {
 
         private AddUserWindow addUserWindow;
-        private List<UserModelView> usersList = new List<UserModelView>();
+        private List<AdminModelView> usersList = new List<AdminModelView>();
         private EditUserWindow editUserWindow;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public List<UserModelView> UsersList { get => usersList; set { usersList = value; RaisePropertyChanged("UsersList"); } }
+        public List<AdminModelView> UsersList { get => usersList; set { usersList = value; RaisePropertyChanged("UsersList"); } }
 
-        public UserModelView SelectedUser { get; set; }
+        public AdminModelView SelectedUser { get; set; }
 
         public AdminWindow()
         {
@@ -45,12 +45,12 @@ namespace Amonic_Airlines.Windows
             OfficeCombobox.ItemsSource = offices;
         }
 
-        private List<UserModelView> UpdateListUserModelView()
+        private List<AdminModelView> UpdateListUserModelView()
         {
-            List<UserModelView> users = new List<UserModelView>();
+            List<AdminModelView> users = new List<AdminModelView>();
             AmonicContext.GetContext().Users.ToList().ForEach((user) =>
             {
-                var newUser = new UserModelView(user)
+                var newUser = new AdminModelView(user)
                 {
                     OfficeName = AmonicContext.GetContext().Offices.FirstOrDefault(O => O.OfficeCode == user.Office).Name
                 };
@@ -61,12 +61,12 @@ namespace Amonic_Airlines.Windows
         }
 
 
-        private List<UserModelView> UpdateListUserModelView(int? OfficeCode)
+        private List<AdminModelView> UpdateListUserModelView(int? OfficeCode)
         {
-            List<UserModelView> users = new List<UserModelView>();
+            List<AdminModelView> users = new List<AdminModelView>();
             AmonicContext.GetContext().Users.Where(u => u.Office == OfficeCode).ToList().ForEach((user) =>
             {
-                var newUser = new UserModelView(user)
+                var newUser = new AdminModelView(user)
                 {
                     OfficeName = AmonicContext.GetContext().Offices.FirstOrDefault(O => O.OfficeCode == user.Office).Name
                 };
