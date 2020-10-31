@@ -13,11 +13,14 @@ namespace Amonic_Airlines
 
         public Authorize(List<User> Users, string Email, string Password, ref int CountInvalidAuthAttempts)
         {
-            var currentUser = Users.FirstOrDefault(u => u.Email == Email);
-            //TODO: Сделать обработку на пустые поля,
-            //      При правильном входе обнулить CountInvalidAuthAttempts
-            //      Понять, почему не сохраняются данные
+            if (Users.Count == 0)
+                return;
 
+            var currentUser = Users.FirstOrDefault(u => u.Email == Email);
+            //TODO: Сделать обработку на пустые поля
+
+            if (string.IsNullOrEmpty(Email.Trim()) || string.IsNullOrEmpty(Password.Trim()))
+                throw new AuthenticationException("Логин или пароль не введены");
             if (currentUser is null)
             {
                 CountInvalidAuthAttempts++;

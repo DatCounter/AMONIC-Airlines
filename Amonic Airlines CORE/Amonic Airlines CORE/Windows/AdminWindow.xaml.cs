@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Amonic_Airlines.Windows
 {
@@ -14,9 +16,11 @@ namespace Amonic_Airlines.Windows
     /// </summary>
     public partial class AdminWindow : Window, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        private AddUserWindow addUserWindow;
         private List<UserModelView> usersList = new List<UserModelView>();
+        private EditUserWindow editUserWindow;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public List<UserModelView> UsersList { get => usersList; set { usersList = value; RaisePropertyChanged("UsersList"); } }
 
@@ -30,9 +34,9 @@ namespace Amonic_Airlines.Windows
             //Take Users to DataGrid
             UsersList = UpdateListUserModelView();
             //Take offices to Combobox
-            List<OfficeComboboxItem> offices = AmonicContext.GetContext().Offices.Select(o => new OfficeComboboxItem 
-                                                {OfficeCode = o.OfficeCode, Name= o.Name}).ToList();
-            offices.Add( new OfficeComboboxItem{OfficeCode = 0, Name = "Choose an element" });
+            List<OfficeComboboxItem> offices = AmonicContext.GetContext().Offices.Select(o => new OfficeComboboxItem
+            { OfficeCode = o.OfficeCode, Name = o.Name }).ToList();
+            offices.Add(new OfficeComboboxItem { OfficeCode = 0, Name = "Choose an element" });
             offices = offices.OrderBy(o => o.OfficeCode).ToList();
             OfficeCombobox.ItemsSource = offices;
         }
@@ -69,8 +73,12 @@ namespace Amonic_Airlines.Windows
 
         private void CanLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedUser == null)
+            if (SelectedUser == null || UsersList.FirstOrDefault(u => u == SelectedUser) == null)
+            {
+                MessageBox.Show("Выберете пользователя!");
                 return;
+            }
+
             User user = AmonicContext.GetContext().Users.FirstOrDefault(u => u.Email == SelectedUser.EmailAddress);
             if (user == null)
             {
@@ -86,17 +94,42 @@ namespace Amonic_Airlines.Windows
 
         private void ChangeRole_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (SelectedUser == null)
+            {
+                MessageBox.Show("Выберете пользователя!");
+                return;
+            }
+            editUserWindow = new EditUserWindow(SelectedUser);
+            this.IsEnabled = false;
+            editUserWindow.Closed += AddUserWindow_Closed;
+            editUserWindow.Show();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
+            addUserWindow = new AddUserWindow(OfficeCombobox.Items
+                                                            .SourceCollection
+                                                            .Cast<OfficeComboboxItem>()
+                                                            .ToList());
 
+            this.IsEnabled = false;
+            addUserWindow.Closed += AddUserWindow_Closed;
+            addUserWindow.Show();
+        }
+
+        private void AddUserWindow_Closed(object sender, EventArgs e)
+        {
+            OfficeCombobox.SelectedIndex = 0;
+            UsersList = UpdateListUserModelView();
+            this.IsEnabled = true;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (addUserWindow != null)
+                addUserWindow.Close();
+            if (e != null)
+                Close();
             //TODO: закрыть сессию
         }
         private void OfficeCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -104,10 +137,15 @@ namespace Amonic_Airlines.Windows
             var currentOffice = (OfficeComboboxItem)OfficeCombobox.SelectedItem;
 
             if (currentOffice.OfficeCode == 0)
-                return;
+                UsersList = UpdateListUserModelView();
+            else
+                UsersList = UpdateListUserModelView(currentOffice.OfficeCode);
 
+        }
 
-            UsersList = UpdateListUserModelView(currentOffice.OfficeCode);
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Exit_Click(sender, null);
         }
         /// <summary>
         /// To raise property changed
@@ -117,6 +155,5 @@ namespace Amonic_Airlines.Windows
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
     }
 }

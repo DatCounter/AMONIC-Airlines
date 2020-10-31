@@ -23,7 +23,7 @@ namespace Amonic_Airlines.Models
 
         public string EmailAddress { get; private set; }
 
-        public int? OfficeCode { get; private set; }
+        public int OfficeCode { get; private set; }
 
         public string OfficeName { get; set; }
 
@@ -31,12 +31,12 @@ namespace Amonic_Airlines.Models
 
         public User CurrentUser { get => currentUser; set { currentUser = value; OnPropertyChanged(); UpdateModel(); } }
 
+        //Конструктор, который преобразует сущность User в UserModelView для представления
         public UserModelView(User user)
         {
             this.CurrentUser = user;
-            UpdateModel();
         }
-
+        //Обновляет модель при получении текущего пользователя
         private void UpdateModel()
         {
             Name = CurrentUser.FirstName;

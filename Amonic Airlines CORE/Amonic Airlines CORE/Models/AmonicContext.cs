@@ -88,8 +88,6 @@ namespace Amonic_Airlines.Models
 
                 entity.Property(e => e.Birthdate).HasColumnType("date");
 
-                entity.Property(e => e.CountInvalidAuthAttempts).HasColumnName("Count_invalid_auth_attempts");
-
                 entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasColumnName("First_name")

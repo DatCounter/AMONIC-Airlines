@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AMONIC Airlines Automation System"
         FontSize="18"
-        FontFamily="PTSans"
+        FontFamily="PTSans" Closing="Window_Closing"
         Height="450" Width="800" WindowStartupLocation="CenterScreen">
         
     <Grid>
