@@ -26,8 +26,6 @@ namespace Amonic_Airlines
         private int countTicks = 10;
         private Visibility visibleTicks = Visibility.Collapsed;
 
-        private AdminWindow adminWindow;
-
         private readonly AdminWindow adminWindow = new AdminWindow();
 
         #endregion
@@ -71,9 +69,6 @@ namespace Amonic_Airlines
             {
                 TryAuthorize = new Authorize(AmonicContext.GetContext().Users.ToList(), Username.Text, Password.Password, ref countAttempts);
 
-            try
-            {
-                Authorize TryAuthorize = new Authorize(AmonicContext.GetContext().Users.ToList(), Username.Text, Password.Password, ref countAttempts);
 
                 Properties.Default["Username"] = Username.Text;
                 Properties.Default.Save();
@@ -135,7 +130,6 @@ namespace Amonic_Airlines
 
                 if (TryAuthorize.User.IsAdmin)
                 {
-                    adminWindow = new AdminWindow();
                     this.Hide();
                     adminWindow.Show();
                     adminWindow.Closed += NotOwnerWindow_Closed;
@@ -152,14 +146,11 @@ namespace Amonic_Airlines
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Password.Password = null;
-                adminWindow = null;
+                adminWindow.Hide();
                 this.Show();
             }
             else
                 this.Close();
-
-
-
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

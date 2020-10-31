@@ -37,7 +37,7 @@
         </StackPanel>
 
         <DataGrid Style="{DynamicResource DataGrid}" ItemsSource="{Binding UsersList}"
-                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2"
+                  AutoGenerateColumns="False" Grid.Column="1" Grid.Row="2" SelectionUnit="Cell"
                   Margin="5 10" FontSize="16" SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
                   HorizontalContentAlignment="Center">
             <DataGrid.Columns>
