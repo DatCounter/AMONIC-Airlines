@@ -11,6 +11,7 @@
     <Compile Remove="Models\ActivityUser.cs" />
     <Compile Remove="Models\Office.cs" />
     <Compile Remove="Models\OfficeComboboxItem.cs" />
+
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
 

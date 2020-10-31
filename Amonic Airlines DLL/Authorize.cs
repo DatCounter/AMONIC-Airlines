@@ -21,6 +21,7 @@ namespace Amonic_Airlines
 
             if (string.IsNullOrEmpty(Email.Trim()) || string.IsNullOrEmpty(Password.Trim()))
                 throw new AuthenticationException("Логин или пароль не введены");
+
             if (currentUser is null)
             {
                 CountInvalidAuthAttempts++;

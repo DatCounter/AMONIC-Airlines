@@ -25,7 +25,11 @@ namespace Amonic_Airlines
         private int countAttempts = Properties.Default.CountAttempts;
         private int countTicks = 10;
         private Visibility visibleTicks = Visibility.Collapsed;
+
         private AdminWindow adminWindow;
+
+        private readonly AdminWindow adminWindow = new AdminWindow();
+
         #endregion
 
         #region Public members
@@ -51,7 +55,6 @@ namespace Amonic_Airlines
             {
                 Username.Text = _username;
             }
-
         }
 
 
@@ -62,10 +65,31 @@ namespace Amonic_Airlines
         /// <param name="e"></param>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+
             Authorize TryAuthorize = null;
             try
             {
                 TryAuthorize = new Authorize(AmonicContext.GetContext().Users.ToList(), Username.Text, Password.Password, ref countAttempts);
+
+            try
+            {
+                Authorize TryAuthorize = new Authorize(AmonicContext.GetContext().Users.ToList(), Username.Text, Password.Password, ref countAttempts);
+
+                Properties.Default["Username"] = Username.Text;
+                Properties.Default.Save();
+
+                var UserSession = AmonicContext.GetContext().ActivityUser.FirstOrDefault(US => US.Email == TryAuthorize.User.Email);
+
+                if (TryAuthorize.User.IsAdmin)
+                {
+                    this.Hide();
+                    adminWindow.Show();
+                }
+
+                //UserSession.LoginDate = DateTime.Now;
+
+                //TODO: Хранение сессий пользователей
+
             }
             catch (AuthenticationException AuthEx)
             {
@@ -133,6 +157,8 @@ namespace Amonic_Airlines
             }
             else
                 this.Close();
+
+
 
         }
 

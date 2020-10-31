@@ -1,4 +1,5 @@
 ﻿using Amonic_Airlines.Models;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace Amonic_Airlines.Windows
     /// </summary>
     public partial class AdminWindow : Window, INotifyPropertyChanged
     {
+
         private AddUserWindow addUserWindow;
         private List<UserModelView> usersList = new List<UserModelView>();
         private EditUserWindow editUserWindow;
@@ -29,6 +31,7 @@ namespace Amonic_Airlines.Windows
         public AdminWindow()
         {
             InitializeComponent();
+
             //Take Data to Window
             DataContext = this;
             //Take Users to DataGrid
@@ -37,6 +40,7 @@ namespace Amonic_Airlines.Windows
             List<OfficeComboboxItem> offices = AmonicContext.GetContext().Offices.Select(o => new OfficeComboboxItem
             { OfficeCode = o.OfficeCode, Name = o.Name }).ToList();
             offices.Add(new OfficeComboboxItem { OfficeCode = 0, Name = "Choose an element" });
+
             offices = offices.OrderBy(o => o.OfficeCode).ToList();
             OfficeCombobox.ItemsSource = offices;
         }
@@ -55,6 +59,7 @@ namespace Amonic_Airlines.Windows
 
             return users;
         }
+
 
         private List<UserModelView> UpdateListUserModelView(int? OfficeCode)
         {

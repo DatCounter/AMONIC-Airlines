@@ -32,6 +32,7 @@
             <ComboBox Width="300" Height="30" x:Name="OfficeCombobox" Padding="5"
                       SelectedItem="SelectedComboItem" DisplayMemberPath="Name"
                       SelectionChanged="OfficeCombobox_SelectionChanged">
+
             </ComboBox>
         </StackPanel>
 
