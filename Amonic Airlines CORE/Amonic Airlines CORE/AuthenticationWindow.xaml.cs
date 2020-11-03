@@ -134,14 +134,17 @@ namespace Amonic_Airlines
         private void NotOwnerWindow_Closed(object sender, EventArgs e)
         {
             if (sender is AuthenticationWindow)
+            {
                 Application.Current.Shutdown();
+                return;
+            }
             if (MessageBox.Show("Желаете авторизоваться под другим именем?", "Авторизация",
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Password.Password = null;
                 if (sender is AdminWindow)
                     adminWindow.Closed -= NotOwnerWindow_Closed;
-                else
+                else if(sender is UserWindow)
                     userWindow.Closed -= NotOwnerWindow_Closed;
                 this.Show();
             }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         FontSize="20"
         FontFamily="PTSans"
-        Title="Login" Height="500" Width="850" WindowStartupLocation="CenterOwner">
+        Title="Login" Height="500" Width="850" WindowStartupLocation="CenterOwner" Closed="NotOwnerWindow_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
