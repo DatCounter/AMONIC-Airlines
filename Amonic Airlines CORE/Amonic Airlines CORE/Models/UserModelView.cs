@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Amonic_Airlines_CORE.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,20 +11,22 @@ namespace Amonic_Airlines.Models
     public class UserModelView : INotifyPropertyChanged
     {
         private readonly User currentUser;
-        private readonly List<ActivityUser> activitiesUser;
+        private List<ActivityUserView> activitiesUser;
         private string welcomeName;
         private string timeSpent;
         private string numberOfCrashes;
-        private readonly TimeSpan timeSpanNow = new TimeSpan(0, 0, 0, 0);
+        private TimeSpan timeSpanNow = new TimeSpan(0, 0, 0, 0);
 
-        public List<ActivityUser> ActivitiesUser => activitiesUser;
-        public List<string> Color { get; set; }
+        public List<ActivityUserView> ActivitiesUser
+        {
+            get => activitiesUser; private set { activitiesUser = value; }
+        }
 
-        public string WelcomeName { get => welcomeName; set { welcomeName = value; RaisePropertyChanged(); } }
+        public string WelcomeName { get => welcomeName; set { welcomeName = value; RaisePropertyChanged();} }
 
         public string TimeSpent
         {
-            get => timeSpent; set { timeSpent = value; RaisePropertyChanged(); }
+            get => timeSpent; set { timeSpent = value; RaisePropertyChanged(); RaisePropertyChanged(); }
         }
 
         public string NumberOfCrashes { get => numberOfCrashes; set { numberOfCrashes = value; RaisePropertyChanged(); } }
@@ -37,20 +40,20 @@ namespace Amonic_Airlines.Models
             };
             timer.Tick += Timer_Tick;
             timer.Start();
-            //step 1: определить все активности пользователя
-            activitiesUser = AmonicContext.GetContext().ActivityUser.
-                        Where(AU => AU.Email == currentUser.Email).
-                        OrderBy(AU => AU.LoginDate).ToList();
+
             UpdateAllData();
         }
 
         private void UpdateAllData()
         {
-            Color = new List<string>();
-            foreach (var activity in activitiesUser)
-            {
-                Color.Add(activity.LogoutDate == null ? "Red" : "White");
-            }
+            ActivitiesUser = new List<ActivityUserView>();
+            //step 1: определить все активности пользователя
+            AmonicContext.GetContext().ActivityUser.
+                        Where(AU => AU.Email == currentUser.Email).
+                        OrderBy(AU => AU.LoginDate).ToList().ForEach((actvivity) =>
+                        {
+                            ActivitiesUser.Add(new ActivityUserView(actvivity));
+                        });
             RaisePropertyChanged(nameof(ActivitiesUser));
             //step 2: дать свойствам жизнь
 
@@ -61,11 +64,11 @@ namespace Amonic_Airlines.Models
             if (timeSpanNow.TotalSeconds == 0)
             {
                 var List = activitiesUser.Where(UA =>
-                    DateTime.Now.Subtract(UA.LoginDate) < new TimeSpan(30, 0, 0, 0)
+                    DateTime.Now.Subtract(UA.LoginDate).TotalDays < new TimeSpan(30, 0, 0, 0).TotalDays
                 ).ToList();
                 List.ForEach((UA) =>
                 {
-                    timeSpanNow.Add(UA.TimeSpent.Value);
+                    timeSpanNow = timeSpanNow.Add(UA.TimeSpent.Value);
                 });
 
             }
@@ -80,7 +83,7 @@ namespace Amonic_Airlines.Models
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            timeSpanNow.Add(new TimeSpan(0, 0, 1));
+            timeSpanNow = timeSpanNow.Add(new TimeSpan(0, 0, 1));
             TimeSpent = $"Time spent on system: {timeSpanNow}";
         }
 

@@ -4,7 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amonic_Airlines.Windows"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
+        FontSize="12"
+        Foreground="#196AA6"
+        FontFamily="Verdana" FontWeight="Regular" 
         Title="UserWindow" Height="380" Width="600">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,7 +16,7 @@
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
         <Menu>
-            <MenuItem Header="Exit"/>
+            <MenuItem Header="Exit" Click="Exit_Click"/>
         </Menu>
         <TextBlock Text="{Binding WelcomeName}" 
                    Grid.Row="1" 
@@ -30,9 +33,9 @@
                    Grid.Row="1"
                    Margin="0 0 25 0"/>
 
-        <DataGrid Grid.Row="2" AutoGenerateColumns="False" Margin="10 10 10 60" ItemsSource="{Binding ActivitiesUser}">
+        <DataGrid Grid.Row="2" FontSize="12" AutoGenerateColumns="False" Margin="10 10 10 60" ItemsSource="{Binding ActivitiesUser}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Date" Width="1*">
+                <DataGridTemplateColumn Header="Date" Width="50*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color}">
@@ -41,7 +44,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Login time" Width="1*">
+                <DataGridTemplateColumn Header="Login time" Width="85*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color}">
@@ -50,7 +53,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Logout time" Width="1*">
+                <DataGridTemplateColumn Header="Logout time" Width="95*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color}">
@@ -59,7 +62,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Time spent on system" Width="2*">
+                <DataGridTemplateColumn Header="Time spent on system" Width="165*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color}">
@@ -68,7 +71,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Unsuccessful logout reason" Width="2.5*">
+                <DataGridTemplateColumn Header="Unsuccessful logout reason" Width="200*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border Background="{Binding Color}">

@@ -1,5 +1,5 @@
-﻿using Amonic_Airlines.Models;
-
+﻿using Amonic_Airlines_CORE.Models;
+using Amonic_Airlines.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

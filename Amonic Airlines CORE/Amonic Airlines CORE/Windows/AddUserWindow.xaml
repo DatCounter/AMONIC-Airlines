@@ -5,43 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Amonic_Airlines.Windows"
         mc:Ignorable="d"
-        FontSize="16"
+         FontSize="18"
+        Foreground="#196AA6"
+        FontFamily="Verdana" FontWeight="Regular" 
         ResizeMode="NoResize"
         Title="AddUserWindow" Height="600" Width="500">
     <Grid Margin="60 25">
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Email Address"/>
-                <TextBox x:Name="TBEmail" Margin="45 0 0 0" Width="200"/>
+                <TextBox x:Name="TBEmail" Margin="50 0 0 0" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="First name"/>
-                <TextBox x:Name="TBFName" Margin="70 0 0 0" Width="200"/>
+                <TextBox x:Name="TBFName" Margin="82 0 0 0" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Last name"/>
-                <TextBox x:Name="TBLName" Margin="70 0 0 0" Width="200"/>
+                <TextBox x:Name="TBLName" Margin="83.5 0 0 0" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Office"/>
-                <ComboBox x:Name="ComboboxOffice" Padding="1.3" DisplayMemberPath="Name" Margin="100 0 0 0" Height="22" Width="200"/>
+                <ComboBox x:Name="ComboboxOffice" Padding="1.3" DisplayMemberPath="Name" Margin="125 0 0 0" Height="22" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Password"/>
-                <PasswordBox x:Name="Password" Margin="75 0 0 0" Width="200"/>
+                <PasswordBox x:Name="Password" Margin="93 0 0 0" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Birthdate"/>
-                <Calendar x:Name="Calendar" Margin="85 0 0 0"/>
+                <Calendar x:Name="Calendar" Margin="105 0 0 0"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                <Button Click="Save_Click" Margin="50 0 0 0" Width="100" Content="Save"/>
-                <Button Click="Cancel_Click" Margin="50 0 0 0" Content="Cancel" Width="100"/>
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0" Height="30">
+                <Button Click="Save_Click" Margin="50 0 0 0" Width="120" Content="Save"/>
+                <Button Click="Cancel_Click" Margin="50 0 0 0" Content="Cancel" Width="120"/>
             </StackPanel>
         </StackPanel>
     </Grid>

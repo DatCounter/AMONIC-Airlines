@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Amonic_Airlines_CORE.Models;
+using Amonic_Airlines.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +19,15 @@ namespace Amonic_Airlines.Windows
     /// </summary>
     public partial class UserWindow : Window
     {
-        public UserWindow()
+        public UserWindow(UserModelView userModel)
         {
             InitializeComponent();
+            DataContext = userModel;
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

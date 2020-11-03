@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Amonic_Airlines.Models
+namespace Amonic_Airlines_CORE.Models
 {
     public partial class User
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using Amonic_Airlines.Models;
+using Amonic_Airlines_CORE.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

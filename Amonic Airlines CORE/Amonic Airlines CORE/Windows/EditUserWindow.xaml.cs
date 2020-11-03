@@ -1,4 +1,5 @@
-﻿using Amonic_Airlines.Models;
+﻿using Amonic_Airlines_CORE.Models;
+using Amonic_Airlines.Models;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;

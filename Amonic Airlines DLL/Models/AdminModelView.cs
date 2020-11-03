@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Amonic_Airlines.Models
+namespace Amonic_Airlines_CORE.Models
 {
     public class AdminModelView : INotifyPropertyChanged
     {

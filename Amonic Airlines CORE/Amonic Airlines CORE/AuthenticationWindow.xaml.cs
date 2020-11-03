@@ -1,4 +1,5 @@
 ﻿using Amonic_Airlines.Models;
+using Amonic_Airlines_CORE.Models;
 using Amonic_Airlines.Windows;
 using System;
 using System.ComponentModel;
@@ -103,7 +104,7 @@ namespace Amonic_Airlines
             //Password : 123
             //
             //AS USER
-            //LOGIN : h.saeed@amonic.com
+            //LOGIN : test3@test
             //Password : 2020
             if (TryAuthorize != null)
             {
@@ -120,7 +121,7 @@ namespace Amonic_Airlines
                 }
                 else
                 {
-                    userWindow = new UserWindow(TryAuthorize.User);
+                    userWindow = new UserWindow(new UserModelView(TryAuthorize.User));
                     userWindow.Show();
                     userWindow.Closed += NotOwnerWindow_Closed;
                 }
@@ -132,24 +133,29 @@ namespace Amonic_Airlines
 
         private void NotOwnerWindow_Closed(object sender, EventArgs e)
         {
+            if (sender is AuthenticationWindow)
+                Application.Current.Shutdown();
             if (MessageBox.Show("Желаете авторизоваться под другим именем?", "Авторизация",
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 Password.Password = null;
+                if (sender is AdminWindow)
+                    adminWindow.Closed -= NotOwnerWindow_Closed;
+                else
+                    userWindow.Closed -= NotOwnerWindow_Closed;
                 this.Show();
             }
             else
             {
                 this.Close();
-                userWindow.Closed -= NotOwnerWindow_Closed;
-                adminWindow.Closed -= NotOwnerWindow_Closed;
+                Application.Current.Shutdown();
             }
 
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            NotOwnerWindow_Closed(this, e);
         }
 
         /// <summary>

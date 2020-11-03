@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Amonic_Airlines.Models
+namespace Amonic_Airlines_CORE.Models
 {
     public class OfficeComboboxItem
     {

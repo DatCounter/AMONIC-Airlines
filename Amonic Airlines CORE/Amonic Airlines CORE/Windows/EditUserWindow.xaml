@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:Amonic_Airlines.Windows"
         mc:Ignorable="d"
         FontSize="18"
+        Foreground="#196AA6"
+        FontFamily="Verdana" FontWeight="Regular" 
         ResizeMode="NoResize"
         Title="EditUserWindow" Height="450" Width="400">
     <Grid Margin="15 25" >
@@ -17,26 +19,26 @@
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="First name"/>
-                <TextBox Text="{Binding Name,Mode=OneTime}" Margin="68 0 0 0" Width="200" IsEnabled="False"/>
+                <TextBox Text="{Binding Name,Mode=OneTime}" Margin="72 0 0 0" Width="200" IsEnabled="False"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 30">
                 <TextBlock Text="Last name"/>
-                <TextBox Text="{Binding LastName,Mode=OneTime}" Margin="68 0 0 0" Width="200" IsEnabled="False"/>
+                <TextBox Text="{Binding LastName,Mode=OneTime}" Margin="73 0 0 0" Width="200" IsEnabled="False"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 40">
                 <TextBlock Text="Office"/>
-                <TextBox Text="{Binding OfficeName,Mode=OneTime}" Margin="102 0 0 0" Width="200" IsEnabled="False"/>
+                <TextBox Text="{Binding OfficeName,Mode=OneTime}" Margin="115 0 0 0" Width="200" IsEnabled="False"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0 0 0 25">
                 <RadioButton Content="User" VerticalContentAlignment="Center" x:Name="isUser" GroupName="non"/>
                 <RadioButton Content="Administrator" VerticalContentAlignment="Center" x:Name="isAdmin" GroupName="non"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                <Button  Margin="50 0 0 0" Width="100" Content="Apply" Click="Apply_Click"/>
-                <Button  Margin="50 0 0 0" Content="Cancel" Click="Cancel_Click" Width="100"/>
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0" Height="30">
+                <Button  Margin="40 0 0 0" Width="120" Content="Apply" Click="Apply_Click"/>
+                <Button  Margin="50 0 0 0" Content="Cancel" Click="Cancel_Click" Width="120"/>
             </StackPanel>
         </StackPanel>
     </Grid>
