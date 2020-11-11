@@ -28,7 +28,7 @@ namespace Amonic_Airlines
         private Visibility visibleTicks = Visibility.Collapsed;
         private UserWindow userWindow;
 
-        private readonly AdminWindow adminWindow = new AdminWindow();
+        private AdminWindow adminWindow;
         #endregion
 
         #region Public members
@@ -116,19 +116,19 @@ namespace Amonic_Airlines
                 this.Hide();
                 if (TryAuthorize.User.IsAdmin)
                 {
+                    adminWindow = new AdminWindow();
                     adminWindow.Show();
                     adminWindow.Closed += NotOwnerWindow_Closed;
                 }
                 else
                 {
                     userWindow = new UserWindow(new UserModelView(TryAuthorize.User));
+                    
                     userWindow.Show();
                     userWindow.Closed += NotOwnerWindow_Closed;
                 }
             }
-            //UserSession.LoginDate = DateTime.Now;
 
-            //TODO: Хранение сессий пользователей
         }
 
         private void NotOwnerWindow_Closed(object sender, EventArgs e)
@@ -137,6 +137,17 @@ namespace Amonic_Airlines
             {
                 Application.Current.Shutdown();
                 return;
+            }
+            if (sender is UserWindow)
+            {
+                UserWindow obj = (UserWindow)sender;
+
+                if (!obj.ClosedByUser)
+                {
+                    var activity = AmonicContext.GetContext().ActivityUser.FirstOrDefault(au => au.Email == obj.CurrentActivityUser.Email && au.LoginDate == obj.CurrentActivityUser.LoginDate);
+                    activity.UnsuccessfulLogoutReason = "Power electro off";
+                    AmonicContext.GetContext().SaveChanges();
+                }
             }
             if (MessageBox.Show("Желаете авторизоваться под другим именем?", "Авторизация",
                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)

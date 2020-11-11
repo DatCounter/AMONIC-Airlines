@@ -10,7 +10,7 @@ namespace Amonic_Airlines.Models
 {
     public class UserModelView : INotifyPropertyChanged
     {
-        private readonly User currentUser;
+        public readonly User currentUser;
         private List<ActivityUserView> activitiesUser;
         private string welcomeName;
         private string timeSpent;
@@ -26,7 +26,7 @@ namespace Amonic_Airlines.Models
 
         public string TimeSpent
         {
-            get => timeSpent; set { timeSpent = value; RaisePropertyChanged(); RaisePropertyChanged(); }
+            get => timeSpent; set { timeSpent = value; RaisePropertyChanged(); }
         }
 
         public string NumberOfCrashes { get => numberOfCrashes; set { numberOfCrashes = value; RaisePropertyChanged(); } }
@@ -64,7 +64,7 @@ namespace Amonic_Airlines.Models
             if (timeSpanNow.TotalSeconds == 0)
             {
                 var List = activitiesUser.Where(UA =>
-                    DateTime.Now.Subtract(UA.LoginDate).TotalDays < new TimeSpan(30, 0, 0, 0).TotalDays
+                    DateTime.Now.Subtract(UA.LoginDate).TotalDays < new TimeSpan(30, 0, 0, 0).TotalDays && UA.TimeSpent != null
                 ).ToList();
                 List.ForEach((UA) =>
                 {
@@ -78,7 +78,7 @@ namespace Amonic_Airlines.Models
                             || UA.LogoutDate is null || UA.TimeSpent is null)
                             .Count();
 
-            NumberOfCrashes = $"Number of crashes: {CountOfCrashes}";
+            NumberOfCrashes = $"Number of crashes: {CountOfCrashes - 1}";
         }
 
         private void Timer_Tick(object sender, EventArgs e)

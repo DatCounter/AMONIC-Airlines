@@ -1,14 +1,11 @@
-﻿using Amonic_Airlines_CORE.Models;
-using Amonic_Airlines.Models;
+﻿using Amonic_Airlines.Models;
+using Amonic_Airlines_CORE.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace Amonic_Airlines.Windows
 {
@@ -38,7 +35,10 @@ namespace Amonic_Airlines.Windows
             UsersList = UpdateListUserModelView();
             //Take offices to Combobox
             List<OfficeComboboxItem> offices = AmonicContext.GetContext().Offices.Select(o => new OfficeComboboxItem
-            { OfficeCode = o.OfficeCode, Name = o.Name }).ToList();
+            {
+                OfficeCode = o.OfficeCode,
+                Name = o.Name
+            }).ToList();
             offices.Add(new OfficeComboboxItem { OfficeCode = 0, Name = "Choose an element" });
 
             offices = offices.OrderBy(o => o.OfficeCode).ToList();
@@ -105,7 +105,7 @@ namespace Amonic_Airlines.Windows
                 return;
             }
             editUserWindow = new EditUserWindow(SelectedUser);
-            this.IsEnabled = false;
+            IsEnabled = false;
             editUserWindow.Closed += AddUserWindow_Closed;
             editUserWindow.Show();
         }
@@ -117,7 +117,7 @@ namespace Amonic_Airlines.Windows
                                                             .Cast<OfficeComboboxItem>()
                                                             .ToList());
 
-            this.IsEnabled = false;
+            IsEnabled = false;
             addUserWindow.Closed += AddUserWindow_Closed;
             addUserWindow.Show();
         }
@@ -126,15 +126,20 @@ namespace Amonic_Airlines.Windows
         {
             OfficeCombobox.SelectedIndex = 0;
             UsersList = UpdateListUserModelView();
-            this.IsEnabled = true;
+            IsEnabled = true;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             if (addUserWindow != null)
+            {
                 addUserWindow.Close();
+            }
+
             if (e != null)
+            {
                 Close();
+            }
             //TODO: закрыть сессию
         }
         private void OfficeCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -142,10 +147,13 @@ namespace Amonic_Airlines.Windows
             var currentOffice = (OfficeComboboxItem)OfficeCombobox.SelectedItem;
 
             if (currentOffice.OfficeCode == 0)
+            {
                 UsersList = UpdateListUserModelView();
+            }
             else
+            {
                 UsersList = UpdateListUserModelView(currentOffice.OfficeCode);
-
+            }
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

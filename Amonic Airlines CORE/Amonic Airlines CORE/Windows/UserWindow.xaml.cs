@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace Amonic_Airlines.Windows
 {
@@ -19,14 +20,36 @@ namespace Amonic_Airlines.Windows
     /// </summary>
     public partial class UserWindow : Window
     {
+        private readonly User user;
+
+        public ActivityUser CurrentActivityUser;
+        public bool ClosedByUser = false;
+
         public UserWindow(UserModelView userModel)
         {
             InitializeComponent();
             DataContext = userModel;
+            user = userModel.currentUser;
+            CreateSession();
+        }
+
+        private void CreateSession()
+        {
+            CurrentActivityUser = new ActivityUser()
+            {
+                Email = user.Email,
+                LoginDate = DateTime.Now
+            };
+            AmonicContext.GetContext().ActivityUser.Add(CurrentActivityUser);
+            AmonicContext.GetContext().SaveChanges();
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
+            var activity = AmonicContext.GetContext().ActivityUser.FirstOrDefault(au => au.Email == CurrentActivityUser.Email && CurrentActivityUser.LoginDate == au.LoginDate);
+            activity.LogoutDate = DateTime.Now;
+            AmonicContext.GetContext().SaveChanges();
+            ClosedByUser = true;
             this.Close();
         }
     }

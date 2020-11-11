@@ -8,7 +8,7 @@
         FontSize="18"
         Foreground="#196AA6"
         FontFamily="Verdana" FontWeight="Regular" 
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Title="EditUserWindow" Height="450" Width="400">
     <Grid Margin="15 25" >
         <StackPanel>

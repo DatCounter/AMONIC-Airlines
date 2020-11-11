@@ -7,8 +7,8 @@
         mc:Ignorable="d" 
         FontSize="12"
         Foreground="#196AA6"
-        FontFamily="Verdana" FontWeight="Regular" 
-        Title="UserWindow" Height="380" Width="600">
+        FontFamily="Verdana" FontWeight="Regular" WindowStartupLocation="CenterScreen"
+        Title="UserWindow" Height="380" Width="600" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -23,7 +23,7 @@
                    VerticalAlignment="Top"
                    HorizontalAlignment="Left"
                    Margin="10 15 0 0"/>
-        <TextBlock Text="{Binding TimeSpent}"
+        <TextBlock Text="{Binding TimeSpent, StringFormat=dd.hh:mm:ss}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Grid.Row="1"/>
