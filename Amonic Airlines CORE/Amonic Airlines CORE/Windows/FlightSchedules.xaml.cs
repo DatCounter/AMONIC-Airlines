@@ -72,7 +72,7 @@ namespace Amonic_Airlines.Windows
                 System.Diagnostics.Debug.WriteLine(import.DuplicateRecords + " дубликатов");
                 System.Diagnostics.Debug.WriteLine(import.RecordWithMissingFields + " ошибок");
             }
-        }
+        } //TODO: Сделать реализацию импорта данных в отдельном окне
 
         public void ApplyFilters_Click(object sender, EventArgs args)
         {
@@ -127,11 +127,11 @@ namespace Amonic_Airlines.Windows
             RaisePropertyChanged(nameof(SchedulesList));
         }
 
-        public void CancelFlight_Click(object sender, EventArgs args)
+        public void CancelFlight_Click(object sender, EventArgs args) //TODO: Сделать реализацию отмены рейса
         {
 
         }
-        public void EditFlight_Click(object sender, EventArgs args)
+        public void EditFlight_Click(object sender, EventArgs args) //TODO: Сделать реализацию изменении рейса
         {
 
         }
