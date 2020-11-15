@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\ActivityUser.cs" />
     <Compile Remove="Models\Office.cs" />
     <Compile Remove="Models\OfficeComboboxItem.cs" />
 

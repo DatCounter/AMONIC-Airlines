@@ -37,19 +37,22 @@
                                HorizontalAlignment="Left"
                                Margin="45 0 0 0" Grid.Column="0"/>
                         <ComboBox Width="150" Grid.Column="0" 
-                                  HorizontalAlignment="Right"/>
+                                  HorizontalAlignment="Right"
+                                  Name="FromComboBox" SelectionChanged="FromComboBox_SelectionChanged"/>
 
                         <TextBlock Margin="50 0 0 0" Text="To" 
                                VerticalAlignment="Center" 
                                    HorizontalAlignment="Left"
                                    Grid.Column="1"/>
                         <ComboBox Width="150" Grid.Column="1"
-                                  HorizontalAlignment="Right"/>
+                                  HorizontalAlignment="Right"
+                                  Name="ToComboBox" SelectionChanged="ToComboBox_SelectionChanged"/>
 
                         <TextBlock Text="Sort by" Margin="20 0 0 0"
                                VerticalAlignment="Center" Grid.Column="2"/>
                         <ComboBox Width="150" Margin="0 0 30 0" Grid.Column="2"
-                                  HorizontalAlignment="Right"/>
+                                  HorizontalAlignment="Right"
+                                  Name="SortByComboBox"/>
                     </Grid>
                     <Grid Margin="0 0 0 20">
                         <Grid.ColumnDefinitions>
@@ -60,23 +63,121 @@
                         <TextBlock Text="Outbound" Margin="5 0"
                                VerticalAlignment="Center" Grid.Column="0"/>
                         <DatePicker Width="150" Height="35" Grid.Column="0"
-                                    HorizontalAlignment="Right"/>
+                                    HorizontalAlignment="Right"
+                                    Name="OutboundTime" SelectedDateFormat="Short"/>
 
                         <TextBlock Text="Flight number" Margin="40 0 0 0"
                                ToolTip="{StaticResource FlightNumberTP}" VerticalAlignment="Center"
                                    Grid.Column="1"/>
-                        <TextBox Width="100" Grid.Column="1"
+                        <TextBox Width="100" Grid.Column="1" MaxLength="4"
                              ToolTip="{StaticResource FlightNumberTP}" Height="30"
-                                 HorizontalAlignment="Right"/>
+                                 HorizontalAlignment="Right"
+                                 Name="FlighNumberTB"
+                                 Typography.NumeralStyle="Normal"/>
                         <Button Content="Apply" Width="150"
-                            HorizontalAlignment="Right" Margin="0 0 30 0" Grid.Column="2"/>
+                            HorizontalAlignment="Right" Margin="0 0 30 0" Grid.Column="2"
+                                Click="ApplyFilters_Click"/>
                     </Grid>
                 </StackPanel>
             </Grid>
         </GroupBox>
 
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="10 20">
+        <DataGrid Grid.Row="1" FontSize="16" CanUserAddRows="False"
+                  CanUserDeleteRows="False" CanUserReorderColumns="False"
+                  SelectionMode="Single" SelectionUnit="FullRow"
+                  AutoGenerateColumns="False" Margin="10 20"
+                  ItemsSource="{Binding SchedulesList}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Date" Width="1.8*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding DateTimeOfRace, StringFormat=d}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
+                <DataGridTemplateColumn Header="Time" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding DateTimeOfRace, StringFormat=hh:mm}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="From" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding FromName}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="To" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding ToName}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Flight number" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding FlightNumber}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Aircraft" Width="1.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding CodeOfFlight}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Economy price" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock TextAlignment="Center" Text="{Binding EconomyPrice, StringFormat=$0}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Business price" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding BussinessPrice, StringFormat=$0}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="First class price" Width="2.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding Color}">
+                                <TextBlock Text="{Binding FirstClassPrice, StringFormat=$0}"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
 
         <Grid Grid.Row="2"
@@ -88,11 +189,13 @@
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
             <Button Content="✖Cancel Flight" Grid.Column="0"
-                    Margin="0 0 5 0" Height="35"/>
+                    Margin="0 0 5 0" Height="35"
+                    Click="CancelFlight_Click"/>
             <Button Content="&#x270e; Edit Flight" Grid.Column="1"
-                    Margin="5 0 0 0"/>
+                    Margin="5 0 0 0"
+                    Click="EditFlight_Click"/>
             <Button Content="🡹 Import Changes" Grid.Column="3"
-                    Margin="5 0"/>
+                    Margin="5 0" Click="ImportChanges_Click"/>
         </Grid>
     </Grid>
 </Window>
